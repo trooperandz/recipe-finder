@@ -14,7 +14,8 @@ const initialState = {
 
 export default function appReducer(state = initialState, action) {
   const {
-    welcomeData
+    homeData,
+    aboutData,
   } = action;
 
   let newState;

@@ -2,25 +2,42 @@
  * App-wide actions
  */
 
-function fetchHomeData() {
+import { homeData, aboutData } from '../store/testData';
 
+import {
+ RECEIVE_HOME_DATA,
+ RECEIVE_ABOUT_DATA,
+} from './actionTypes';
+
+function fetchHomeData() {
+  return (dispatch) => {
+    dispatch(receiveHomeData(homeData));
+  };
 }
 
-function recieveHomeData() {
-
+function receiveHomeData(homeData) {
+  return {
+    type: RECEIVE_HOME_DATA,
+    homeData,
+  };
 }
 
 function fetchAboutData() {
-
+  return (dispatch) => {
+    dispatch(receiveAboutData(aboutData));
+  };
 }
 
-function recieveAboutData() {
-
+function receiveAboutData(aboutData) {
+  return {
+    type: RECEIVE_ABOUT_DATA,
+    aboutData,
+  };
 }
 
 export default {
   fetchHomeData,
-  recieveHomeData,
+  receiveHomeData,
   fetchAboutData,
-  recieveAboutData,
+  receiveAboutData,
 };

@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import List from '../components/List';
-import Link from '../components/Link';
-import { fetchHomeData } from '../actions/appActions';
+import NavLink from '../components/NavLink';
+import appActions from '../actions/appActions';
 
 class HomeContainer extends Component {
   componentDidMount() {
-    const { homeData, fetchHomeData } = this.props;
+    const { homeData, appActions: { fetchHomeData } } = this.props;
 
     if (!homeData.length) fetchHomeData();
   }
@@ -25,21 +25,21 @@ class HomeContainer extends Component {
       <Fragment>
         <h1>Home Page</h1>
         <List listItems={homeData} />
-        <Link ctaText='About Us' route='/about'>About Us</Link>
+        <NavLink ctaText='About Us' route='about'>About Us</NavLink>
       </Fragment>
     );
   }
 }
 
-function mapStateToProps({app}) {
+function mapStateToProps(state) {
   return {
-    homeData: app.homeData,
+    homeData: state.app.homeData,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchHomeData: bindActionCreators(fetchHomeData, dispatch),
+    appActions: bindActionCreators(appActions, dispatch),
   };
 }
 

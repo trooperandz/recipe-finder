@@ -4,16 +4,18 @@
 
 import React, { memo } from 'react';
 
-function renderListItems(items) {
-  return items.map((item) => <li>item</li>);
+function renderListItems(items = []) {
+  return items.map((item, i) => <li key={i}>{item}</li>);
 }
 
 const List = memo(function List(props) {
   const { listItems } = props;
 
-  <ul>
-    {renderListItems(listItems)}
-  </ul>
+  return (
+    <ul>
+      {renderListItems(listItems)}
+    </ul>
+  );
 });
 
 export default List;

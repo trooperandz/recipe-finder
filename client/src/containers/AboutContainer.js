@@ -2,17 +2,17 @@
  * About page
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import List from '../components/List';
-import Link from '../components/Link';
-import { fetchAboutData } from '../actions/appActions';
+import NavLink from '../components/NavLink';
+import appActions from '../actions/appActions';
 
 class AboutContainer extends Component {
   componentDidMount() {
-    const { aboutData, fetchAboutData } = this.props;
+    const { aboutData, appActions: { fetchAboutData } } = this.props;
 
     if (!aboutData.length) fetchAboutData();
   }
@@ -25,21 +25,21 @@ class AboutContainer extends Component {
       <Fragment>
         <h1>About Page</h1>
         <List listItems={aboutData} />
-        <Link ctaText='Home' route='/'>Home</Link>
+        <NavLink ctaText='Home' route=''>Home</NavLink>
       </Fragment>
     );
   }
 }
 
-function mapStateToProps({app}) {
+function mapStateToProps(state) {
   return {
-    aboutData: app.aboutData,
+    aboutData: state.app.aboutData,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAboutData: bindActionCreators(fetchAboutData, dispatch),
+    appActions: bindActionCreators(appActions, dispatch),
   };
 }
 
