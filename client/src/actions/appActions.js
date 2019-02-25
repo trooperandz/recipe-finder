@@ -5,8 +5,8 @@
 import { homeData, aboutData } from '../store/testData';
 
 import {
- RECEIVE_HOME_DATA,
- RECEIVE_ABOUT_DATA,
+  RECEIVE_HOME_DATA,
+  RECEIVE_ABOUT_DATA,
 } from './actionTypes';
 
 function fetchHomeData() {

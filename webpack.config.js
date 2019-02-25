@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
+const webpackConfig = {
   entry: './client/src/index.js',
   mode: 'development',
   module: {
@@ -17,7 +17,8 @@ module.exports = {
   resolve: { extensions: ['*', '.js', '.jsx'] },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/dist/',
     filename: 'bundle.js',
   },
 };
+
+module.exports = webpackConfig;

@@ -5,6 +5,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import List from '../components/List';
 import NavLink from '../components/NavLink';
@@ -42,6 +43,10 @@ function mapDispatchToProps(dispatch) {
     appActions: bindActionCreators(appActions, dispatch),
   };
 }
+
+AboutContainer.propTypes = {
+  aboutData: PropTypes.array.isRequired,
+};
 
 export default connect(
   mapStateToProps,

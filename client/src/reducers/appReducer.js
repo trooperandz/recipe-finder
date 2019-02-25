@@ -20,7 +20,7 @@ export default function appReducer(state = initialState, action) {
 
   let newState;
 
-  switch(action.type) {
+  switch (action.type) {
     case RECEIVE_HOME_DATA:
       newState = {
         ...state,

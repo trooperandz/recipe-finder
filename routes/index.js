@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+// ALL requests (handled by react router)
+router.get('*', (req, res, next) => {
   res.render('index');
 });
 
