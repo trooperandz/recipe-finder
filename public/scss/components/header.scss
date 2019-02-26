@@ -1,0 +1,9 @@
+// Main header container
+
+.header {
+  @include flex-center;
+
+  &__title {
+    font-weight: 400;
+  }
+}

@@ -12,7 +12,30 @@ class RecipeCard extends PureComponent {
   }
 
   onClickRecipe() {
-    console.log('clicked recipe')
+    const {
+      isRecipeModalActive,
+      updateRecipeModalStatus,
+      updateRecipeDetail,
+      recipeId,
+      recipeTitle,
+      recipeInstructions,
+      ingredientArr,
+      imageStyle,
+      history,
+    } = this.props;
+
+    const recipeDetailObj = {
+      recipeId,
+      recipeTitle,
+      recipeInstructions,
+      ingredientArr,
+      imageStyle,
+    };
+
+    // TODO: this history push is causing unwanted modal renders while typing search inputs...
+    // history.push(`/${recipeId}`);
+    updateRecipeModalStatus(isRecipeModalActive);
+    updateRecipeDetail(recipeDetailObj);
   }
 
   render() {

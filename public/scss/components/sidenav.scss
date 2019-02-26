@@ -1,0 +1,103 @@
+// Favorites side nav
+
+.sidenav {
+  position: fixed;
+  left: 0;
+  width: $sidenav-width;
+  height: 100%;
+  transform: translateX(-$sidenav-width);
+  transition: all .5s ease-in-out;
+  z-index: 3;
+  background-color: $color-fiord;
+  @include box-shadow;
+
+  // Internal side nav close icon
+  .fa-times-circle {
+    position: absolute;
+    visibility: visible;
+    right: 12px;
+    top: 8px;
+    font-size: 20px;
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  &__title {
+    background-color: $color-light-slate-gray;
+    font-weight: bold;
+    font-size: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65px;
+    color: $color-white;
+    letter-spacing: 3.5px;
+    font-weight: 200;
+
+    // External side nav open icon, hidden on larger screens
+    .fa-bars {
+      position: fixed;
+      visibility: visible;
+      top: 32px;
+      transform: translateY(-50%);
+      right: -185px;
+      padding: 6px;
+      background-color: $color-hippie-blue;
+      color: $color-white;
+      font-size: 23px;
+      cursor: pointer;
+
+      &.hidden {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__open {
+    @include font-family-main;
+  }
+
+  // The main ul
+  &__list {
+    padding-left: 0;
+  }
+
+  &__list-item {
+    position: relative;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 17px;
+    padding-left: 52px;
+    font-size: 16px;
+    color: $color-white;
+    letter-spacing: 1px;
+    transition: background-color .3s ease;
+    font-weight: 300;
+
+    &:hover {
+      background-color: rgba(255,255,255, .2);
+    }
+
+    &.active {
+      border-left: 3px solid #71b6f9;
+      font-weight: bold;
+      color: #71b6f9;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1px;
+        width: 50%;
+        background-color: #e7eaf0;
+        bottom: 3px;
+      }
+    }
+  }
+
+  &--active {
+    transform: translateX(0);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

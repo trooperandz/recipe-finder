@@ -1,5 +1,5 @@
 /**
- * Render list items
+ * Render main page recipe cards list
  */
 
 import React, { Component } from 'react';
@@ -12,20 +12,36 @@ import appActions from '../actions/appActions';
 
 class RecipeList extends Component {
   componentDidMount() {
-    const { latestMealsArr, appActions: { fetchLatestMeals } } = this.props;
+    const {
+      latestMealsArr,
+      appActions: { fetchLatestMeals }
+    } = this.props;
 
     if (!latestMealsArr.length) fetchLatestMeals();
   }
 
   renderRecipeCards() {
-    const { latestMealsArr } = this.props;
+    const {
+      latestMealsArr,
+      isRecipeModalActive,
+      searchResultsArr,
+      isSearchActive,
+      history,
+      appActions: { updateRecipeModalStatus, updateRecipeDetail },
+    } = this.props;
 
-    return latestMealsArr.map((meal, i) => {
+    let activeRecipeArr = latestMealsArr;
+
+    // Set active recipe array depending on search status
+    if (searchResultsArr && isSearchActive) activeRecipeArr = searchResultsArr;
+
+    return activeRecipeArr.map((meal, i) => {
       const {
         recipeId,
         recipeTitle,
         recipeInstructions,
         recipeImageUrl,
+        ingredientArr,
       } = meal;
 
       const imageStyle = {
@@ -37,7 +53,13 @@ class RecipeList extends Component {
           key={recipeId}
           recipeId={recipeId}
           recipeTitle={recipeTitle}
+          recipeInstructions={recipeInstructions}
+          ingredientArr={ingredientArr}
           imageStyle={imageStyle}
+          isRecipeModalActive={isRecipeModalActive}
+          updateRecipeModalStatus={updateRecipeModalStatus}
+          updateRecipeDetail={updateRecipeDetail}
+          history={history}
         />
       );
     });
@@ -55,6 +77,9 @@ class RecipeList extends Component {
 function mapStateToProps(state) {
   return {
     latestMealsArr: state.app.latestMealsArr,
+    searchResultsArr: state.app.searchResultsArr,
+    isSearchActive: state.app.isSearchActive,
+    isRecipeModalActive: state.app.isRecipeModalActive,
   };
 }
 

@@ -1,0 +1,47 @@
+// Main search input, fixed at top right of app
+
+.search {
+  @include box-shadow;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 350px;
+  z-index: 2;
+  top: 16px;
+  right: 24px;
+
+  &__input {
+    height: 42px;
+    width: 100%;
+    max-width: 750px;
+    font-family: inherit;
+    box-sizing: border-box;
+    background-color: $color-white;
+    border-radius: 3px;
+    overflow: hidden;
+    outline: none;
+    border: 1px solid transparent;
+    transition: border 0.1s ease-out;
+    color: $color-mako;
+    font-size: 1.2rem;
+    padding: .5rem;
+    padding-left: 38px;
+    font-weight: 300;
+  }
+
+  .fa-search {
+    position: absolute;
+    left: 8px;
+    font-size: 22px;
+    color: $color-gray;
+    cursor: pointer;
+  }
+
+  .fa-arrow-right {
+    position: absolute;
+    right: 8px;
+    font-size: 22px;
+    color: $color-hippie-blue;
+    cursor: pointer;
+  }
+}

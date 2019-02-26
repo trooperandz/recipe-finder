@@ -3,19 +3,29 @@
  */
 
 import axios from 'axios';
-import { RECIPE_API_KEY } from '../util/constants';
-import { RECEIVE_RECIPE_DATA } from './actionTypes';
-import { safeParseJSON, formatLatestMeals } from '../util/utils';
 
-function fetchLatestMeals() { console.log('fetching meals...')
+import { RECIPE_API_KEY } from '../util/constants';
+import { safeParseJSON, formatLatestMeals } from '../util/utils';
+import {
+  RECEIVE_RECIPE_DATA,
+  UPDATE_RECIPE_MODAL_STATUS,
+  UPDATE_RECIPE_DETAIL,
+  UPDATE_RECIPE_FAVORITES,
+  RECEIVE_SEARCH_RESULTS,
+  UPDATE_SEARCH_TERM,
+  UPDATE_SEARCH_ACTIVE_STATUS,
+} from './actionTypes';
+
+/**
+ * Fetch today's latest meals
+ */
+function fetchLatestMeals() {
   return (dispatch) => {
     axios.get(`https://www.themealdb.com/api/json/v1/${RECIPE_API_KEY}/latest.php`)
-      .then((response) => { console.log('response: ', response.data.meals);
-        // const parsedResponse = safeParseJSON(response);
+      .then((response) => {
         if (response && response.data) {
           const { data: { meals = {} } } = response;
           const formattedResponse = formatLatestMeals(meals);
-          console.log('formattedResponse: ', formattedResponse);
 
           dispatch(receiveLatestMeals(formattedResponse));
         } else {
@@ -28,6 +38,9 @@ function fetchLatestMeals() { console.log('fetching meals...')
   };
 }
 
+/**
+ * Default today's meals data
+ */
 function receiveLatestMeals(latestMealsArr) {
   return {
     type: RECEIVE_RECIPE_DATA,
@@ -35,7 +48,134 @@ function receiveLatestMeals(latestMealsArr) {
   };
 }
 
+/**
+ * Determines hide/show of modal
+ */
+function updateRecipeModalStatus(isRecipeModalActive) {
+  return {
+    type: UPDATE_RECIPE_MODAL_STATUS,
+    isRecipeModalActive,
+  }
+}
+
+/**
+ * Populate the recipe detail modal data
+ */
+function updateRecipeDetail(recipeDetailObj) {
+  return {
+    type: UPDATE_RECIPE_DETAIL,
+    recipeDetailObj,
+  };
+}
+
+/**
+ *  Maintain sidenav recipe favorites list
+ */
+function updateRecipeFavorites(recipeFavoritesObj) {
+  return {
+    type: UPDATE_RECIPE_FAVORITES,
+    recipeFavoritesObj,
+  };
+}
+
+/**
+ * Set the search input value
+ */
+function setSearchTerm(searchTerm) {
+  return {
+    type: UPDATE_SEARCH_TERM,
+    searchTerm,
+  };
+}
+
+/**
+ * Perform an api search on search input submit
+ */
+function fetchSearchResults(searchTerm) {
+  return (dispatch) => {
+    axios.get(`https://www.themealdb.com/api/json/v1/${RECIPE_API_KEY}/search.php?s=${searchTerm}`)
+      .then((response) => {
+        if (response && response.data) {
+          const { data: { meals = {} } } = response;
+          const formattedResponse = formatLatestMeals(meals);
+
+          dispatch(receiveSearchResults(formattedResponse));
+          dispatch(updateSearchActiveStatus(true));
+        } else {
+          console.log('Response did not return search results...');
+        }
+      })
+      .catch((error) =>  {
+        console.log(error);
+      });
+  };
+}
+
+/**
+ * Determines display status of search-specific items
+ */
+function updateSearchActiveStatus(isSearchActive) {
+  return {
+    type: UPDATE_SEARCH_ACTIVE_STATUS,
+    isSearchActive: isSearchActive,
+  };
+}
+
+function receiveSearchResults(searchResultsArr) {
+  return {
+    type: RECEIVE_SEARCH_RESULTS,
+    searchResultsArr,
+  };
+}
+
+/**
+ * If user loads a direct meal id into the url, load the modal recipe details
+ */
+function fetchRecipeDetail(recipeId) {
+  return (dispatch) => {
+    axios.get(`https://www.themealdb.com/api/json/v1/${RECIPE_API_KEY}/lookup.php?i=${recipeId}`)
+      .then((response) => {
+        if (response && response.data) {
+          const { data: { meals = [] } } = response;
+          const formattedResponse = formatLatestMeals(meals);
+
+          const {
+            recipeId,
+            recipeTitle,
+            recipeInstructions,
+            ingredientArr,
+            recipeImageUrl,
+          } = formattedResponse[0];
+
+          const imageStyle = { backgroundImage: `url('${recipeImageUrl}')`};
+
+          dispatch(updateRecipeDetail({
+            recipeId,
+            recipeTitle,
+            recipeInstructions,
+            ingredientArr,
+            imageStyle,
+          }));
+
+          dispatch(updateRecipeModalStatus(false)); // double negative in reducer, make it true
+        } else {
+          console.log('Response did not return recipe detail...');
+        }
+      })
+      .catch((error) =>  {
+        console.log(error);
+      });
+  }
+}
+
 export default {
   fetchLatestMeals,
   receiveLatestMeals,
+  updateRecipeModalStatus,
+  updateRecipeDetail,
+  updateRecipeFavorites,
+  setSearchTerm,
+  fetchSearchResults,
+  updateSearchActiveStatus,
+  fetchRecipeDetail,
 };

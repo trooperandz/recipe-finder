@@ -1,5 +1,9 @@
 /* Sass mixins */
 
+@mixin font-family-main {
+  font-family: 'Nunito', 'Helvetica Neue';
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;

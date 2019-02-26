@@ -11,6 +11,6 @@ export default function configureStore() {
     rootReducer,
     compose(applyMiddleware(thunk)),
   );
-  console.log('store in configureStore: ', store.getState());
+
   return store;
 }
