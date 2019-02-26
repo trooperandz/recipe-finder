@@ -7,3 +7,4 @@
  - Limit results to 5 per instructions
  - A bit of responsiveness cleanup
  - Add main hero image icon per mockup
+ - Would prefer more React cleanup time...
