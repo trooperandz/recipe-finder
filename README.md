@@ -4,11 +4,13 @@
  - Complete pagination
  - Modal overflow scroll not working as desired
  - Limit results to 5 per instructions
- - A bit of responsiveness cleanup
+ - A bit of responsiveness cleanup for mobile etc
  - Add main hero image icon per mockup
  - Heart Icon feedback on click (set active status etc)
  - Would like to add a loading spinner for search etc
  - Would prefer more React cleanup time (propTypes etc...)
+
+ - Note: No CSS framework was used; custom Flexbox and CSS Grid were used for grid etc
 
 ### Note:  Router history.push() route setup was causing the modal to fire if reached by direct link.  I commented it out, and the main Router structure needs revisiting in terms of the subroute setup
  - You can still test the direct url modal recipe load functionality with this link: https://vast-dusk-55857.herokuapp.com/52966
