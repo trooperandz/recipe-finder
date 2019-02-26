@@ -5,8 +5,7 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomeContainer from '../containers/HomeContainer';
-import AboutContainer from '../containers/AboutContainer';
+import MainContainer from '../containers/MainContainer';
 import NotFound from '../containers/NotFound';
 
 class App extends Component {
@@ -14,8 +13,7 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route exact path='/' component={HomeContainer}></Route>
-          <Route path='/about' component={AboutContainer}></Route>
+          <Route exact path='/' component={MainContainer}></Route>
           <Route component={NotFound}></Route>
         </Switch>
       </Fragment>

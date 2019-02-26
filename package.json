@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "hbs": "~4.0.1",
@@ -22,7 +23,8 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "safe-json-parse": "^4.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

@@ -7,26 +7,28 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import List from '../components/List';
-import NavLink from '../components/NavLink';
+import RecipeModal from '../components/RecipeModal';
+import HeadingMain from '../components/HeadingMain';
+import HeroImage from '../components/HeroImage';
+import RecipeList from '../components/RecipeList';
 import appActions from '../actions/appActions';
 
-class AboutContainer extends Component {
+class MainContainer extends Component {
   componentDidMount() {
-    const { aboutData, appActions: { fetchAboutData } } = this.props;
-
-    if (!aboutData.length) fetchAboutData();
+    // Fetch today's recipes on mount
   }
 
   render() {
-    const { aboutData } = this.props;
-    console.log('aboutData: ', aboutData);
+    const { } = this.props;
 
     return (
       <Fragment>
-        <h1>About Page</h1>
-        <List listItems={aboutData} />
-        <NavLink ctaText='Home' route=''>Home</NavLink>
+        <RecipeModal />
+        <HeroImage />
+        <div className="app-wrapper">
+          <HeadingMain mainTitle='Recipes of the Day'/>
+          <RecipeList />
+        </div>
       </Fragment>
     );
   }
@@ -34,7 +36,7 @@ class AboutContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    aboutData: state.app.aboutData,
+
   };
 }
 
@@ -44,11 +46,11 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-AboutContainer.propTypes = {
-  aboutData: PropTypes.array.isRequired,
+MainContainer.propTypes = {
+
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AboutContainer);
+)(MainContainer);

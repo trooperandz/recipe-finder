@@ -3,34 +3,25 @@
  */
 
 import {
-  RECEIVE_HOME_DATA,
-  RECEIVE_ABOUT_DATA,
+  RECEIVE_RECIPE_DATA,
 } from '../actions/actionTypes';
 
 const initialState = {
-  homeData: [],
-  aboutData: [],
+  latestMealsArr: [],
 };
 
 export default function appReducer(state = initialState, action) {
   const {
-    homeData,
-    aboutData,
+    latestMealsArr,
   } = action;
 
   let newState;
 
   switch (action.type) {
-    case RECEIVE_HOME_DATA:
+    case RECEIVE_RECIPE_DATA:
       newState = {
         ...state,
-        homeData,
-      };
-      return newState;
-    case RECEIVE_ABOUT_DATA:
-      newState = {
-        ...state,
-        aboutData,
+        latestMealsArr,
       };
       return newState;
     default:

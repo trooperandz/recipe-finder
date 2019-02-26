@@ -2,42 +2,40 @@
  * App-wide actions
  */
 
-import { homeData, aboutData } from '../store/testData';
+import axios from 'axios';
+import { RECIPE_API_KEY } from '../util/constants';
+import { RECEIVE_RECIPE_DATA } from './actionTypes';
+import { safeParseJSON, formatLatestMeals } from '../util/utils';
 
-import {
-  RECEIVE_HOME_DATA,
-  RECEIVE_ABOUT_DATA,
-} from './actionTypes';
-
-function fetchHomeData() {
+function fetchLatestMeals() { console.log('fetching meals...')
   return (dispatch) => {
-    dispatch(receiveHomeData(homeData));
+    axios.get(`https://www.themealdb.com/api/json/v1/${RECIPE_API_KEY}/latest.php`)
+      .then((response) => { console.log('response: ', response.data.meals);
+        // const parsedResponse = safeParseJSON(response);
+        if (response && response.data) {
+          const { data: { meals = {} } } = response;
+          const formattedResponse = formatLatestMeals(meals);
+          console.log('formattedResponse: ', formattedResponse);
+
+          dispatch(receiveLatestMeals(formattedResponse));
+        } else {
+          console.log('Response did not return meals...');
+        }
+      })
+      .catch((error) =>  {
+        console.log(error);
+      });
   };
 }
 
-function receiveHomeData(homeData) {
+function receiveLatestMeals(latestMealsArr) {
   return {
-    type: RECEIVE_HOME_DATA,
-    homeData,
-  };
-}
-
-function fetchAboutData() {
-  return (dispatch) => {
-    dispatch(receiveAboutData(aboutData));
-  };
-}
-
-function receiveAboutData(aboutData) {
-  return {
-    type: RECEIVE_ABOUT_DATA,
-    aboutData,
+    type: RECEIVE_RECIPE_DATA,
+    latestMealsArr,
   };
 }
 
 export default {
-  fetchHomeData,
-  receiveHomeData,
-  fetchAboutData,
-  receiveAboutData,
+  fetchLatestMeals,
+  receiveLatestMeals,
 };
