@@ -6,3 +6,4 @@
  - Router history.push() is interfering with modal show/close state
  - Limit results to 5 per instructions
  - A bit of responsiveness cleanup
+ - Add main hero image icon per mockup
