@@ -7,6 +7,7 @@
  - Limit results to 5 per instructions
  - A bit of responsiveness cleanup
  - Add main hero image icon per mockup
+ - Heart Icon feedback on click (set active status etc)
  - Would like to add a loading spinner for search etc
  - Would prefer more React cleanup time (propTypes etc...)
 
