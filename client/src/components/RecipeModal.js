@@ -96,7 +96,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatc) {
+function mapDispatchToProps(dispatch) {
   return {
     appActions: bindActionCreators(appActions, dispatch),
   };
