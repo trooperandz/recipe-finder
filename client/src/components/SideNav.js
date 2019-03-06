@@ -69,9 +69,7 @@ class SideNav extends PureComponent {
         <i className="far fa-times-circle" onClick={this.handleSideNavClose}></i>
         <div className="sidenav__img"></div>
         <div className="sidenav__title">Favorites
-          <i className={`fas fa-bars ${hiddenStyle}`} onClick={this.handleSideNavClose}>&nbsp;
-            <span className="sidenav__open">Favorites</span>
-          </i>
+          <i className={`fas fa-bars ${hiddenStyle}`} onClick={this.handleSideNavClose}></i>
         </div>
         <ul className="sidenav__list">
           {this.renderListItems()}

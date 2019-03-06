@@ -14,24 +14,37 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 20px; }
+  margin: 40px; }
 
 /* Holds the recipe cards */
 .card-grid-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-auto-rows: 400px;
+  grid-template-columns: repeat(auto-fit, minmax(334px, 1fr));
+  grid-auto-rows: 334px;
   grid-gap: 20px;
   width: 100%;
   padding: 20px;
   overflow-x: hidden; }
 
 .hero-image {
+  position: relative;
   background-image: url("../img/home-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: 500px; }
+  .hero-image:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../img/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    z-index: 1; }
 
 .header {
   display: flex;
@@ -68,7 +81,7 @@ html, body {
     cursor: pointer;
     overflow: hidden; }
   .recipe-card:hover {
-    transform: scale(1.12);
+    transform: scale(1.05);
     z-index: 1; }
 
 .sidenav {
@@ -105,7 +118,7 @@ html, body {
       visibility: visible;
       top: 32px;
       transform: translateY(-50%);
-      right: -185px;
+      right: -50px;
       padding: 6px;
       background-color: #4aa;
       color: #fff;
