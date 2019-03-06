@@ -5,7 +5,6 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
 
 import IngredientList from './IngredientList';
 import IconClose from './IconClose';
@@ -19,10 +18,6 @@ class RecipeModal extends PureComponent {
 
     this.onClickCloseIcon = this.onClickCloseIcon.bind(this);
     this.onClickHeartIcon = this.onClickHeartIcon.bind(this);
-  }
-
-  componentDidMount() {
-    Cookies.remove('favoriteRecipes');
   }
 
   componentWillUnmount() {
@@ -101,7 +96,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatc) {
   return {
     appActions: bindActionCreators(appActions, dispatch),
   };
