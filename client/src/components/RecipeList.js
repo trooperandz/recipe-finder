@@ -9,15 +9,18 @@ import PropTypes from 'prop-types';
 
 import RecipeCard from './RecipeCard';
 import appActions from '../actions/appActions';
+import sagas from '../actions/sagas';
 
 class RecipeList extends Component {
   componentDidMount() {
     const {
       latestMealsArr,
-      appActions: { fetchLatestMeals }
+      appActions: { fetchLatestMeals },
+      sagas: { requestSaga },
     } = this.props;
 
     if (!latestMealsArr.length) fetchLatestMeals();
+    requestSaga();
   }
 
   renderRecipeCards() {
@@ -86,6 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     appActions: bindActionCreators(appActions, dispatch),
+    sagas: bindActionCreators(sagas, dispatch),
   };
 }
 
