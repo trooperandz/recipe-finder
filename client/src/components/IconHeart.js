@@ -1,5 +1,5 @@
 /**
- * Modal heart icon
+ * Modal heart icon for LOVE
  */
 
 import React, { memo } from 'react';
